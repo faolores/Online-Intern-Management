@@ -83,7 +83,7 @@ function ordinal_suffix($num){
 								<td class="p-1" width="40%">
 									<?php echo $row['question'] ?>
 								</td>
-								<?php for($c=0;$c<6;$c++): ?>
+								<?php for($c=1;$c<6;$c++): ?>
 								<td class="text-center">
 									<span class="rate_<?php echo $c.'_'.$row['id'] ?> rates"></span>
 			                      </div>
