@@ -15,11 +15,11 @@
     <ul class="navbar-nav">
       <?php if(isset($_SESSION['login_id'])): ?>
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="" role="button" style="color:black"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="" role="button" style="color:white"><i class="fas fa-bars"></i></a>
       </li>
     <?php endif; ?>
       <li>
-        <a class="nav-link text-dark"  href="./" role="button"> <large><b style="color:black"><?php echo $_SESSION['system']['name'] ?></b></large></a>
+        <a class="nav-link text-dark"  href="./" role="button"> <large><b style="color:white"><?php echo $_SESSION['system']['name'] ?></b></large></a>
       </li>
     </ul>
     
@@ -28,7 +28,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
       <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button" style="color:black">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button" style="color:white">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
         
