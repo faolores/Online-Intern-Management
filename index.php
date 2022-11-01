@@ -1,138 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start() ?>
 <?php 
-	if(!isset($_SESSION['login_id']))
-	    header('location:login.php');
-    include 'db_connect.php';
-    ob_start();
-  if(!isset($_SESSION['system'])){
+session_start();
+include('./db_connect.php');
+  ob_start();
+  // if(!isset($_SESSION['system'])){
 
     $system = $conn->query("SELECT * FROM system_settings")->fetch_array();
     foreach($system as $k => $v){
       $_SESSION['system'][$k] = $v;
     }
-  }
+  // }
   ob_end_flush();
-
-	include 'header.php' 
 ?>
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-<div class="wrapper">
-  <?php include 'topbar.php' ?>
-  <?php include $_SESSION['login_view_folder'].'sidebar.php' ?>
+<?php 
+if(isset($_SESSION['login_id']))
+header("location:login.php?page=home");
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-  	 <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
-	    <div class="toast-body text-white">
-	    </div>
-	  </div>
-    <div id="toastsContainerTopRight" class="toasts-top-right fixed"></div>
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0"><?php echo $title ?></h1>
-          </div><!-- /.col -->
-
-        </div><!-- /.row -->
-            <hr class="border-primary">
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-         <?php 
-            $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-            if(!file_exists($_SESSION['login_view_folder'].$page.".php")){
-                include '404.html';
-            }else{
-            include $_SESSION['login_view_folder'].$page.'.php';
-
-            }
-          ?>
-      </div><!--/. container-fluid -->
-    </section>
-    <!-- /.content -->
-    <div class="modal fade" id="confirm_modal" role='dialog'>
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title">Confirmation</h5>
-      </div>
-      <div class="modal-body">
-        <div id="delete_content"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='confirm' onclick="">Continue</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-      </div>
-    </div>
+?>
+<?php include 'header.php' ?>
+<body class="hold-transition login-page text-white" style="background-image: url('https://www.apc.edu.ph/wp-content/uploads/2019/05/Rams_Video_Still.png'); bg-size: cover;">
+  <h2><b><?php echo $_SESSION['system']['name'] ?> </b></h2>
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#" class="text-black"></a>
   </div>
-  <div class="modal fade" id="uni_modal" role='dialog'>
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title"></h5>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Save</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      </div>
-      </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <form action="" id="login-form">
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="email" required placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password" required placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="">Login As</label>
+          <select name="login" id="" class="custom-select custom-select-sm">
+            <option value="3">Industry Professor</option>
+            <option value="2">Intern</option>
+            <option value="1">Internship Head</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
     </div>
+    <!-- /.login-card-body -->
   </div>
-  <div class="modal fade" id="uni_modal_right" role='dialog'>
-    <div class="modal-dialog modal-full-height  modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span class="fa fa-arrow-right"></span>
-        </button>
-      </div>
-      <div class="modal-body">
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="viewer_modal" role='dialog'>
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-              <button type="button" class="btn-close" data-dismiss="modal"><span class="fa fa-times"></span></button>
-              <img src="" alt="">
-      </div>
-    </div>
-  </div>
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer navbar">
-    <strong>Copyright &copy; 2022 <a href="">StepBrogrammers</a>. All rights reserved.</strong>
-    <div class="float-right d-none d-sm-inline-block">
-      <b><?php echo $_SESSION['system']['name'] ?></b>
-    </div>
-  </footer>
 </div>
-<!-- ./wrapper -->
+<!-- /.login-box -->
+<script>
+  $(document).ready(function(){
+    $('#login-form').submit(function(e){
+    e.preventDefault()
+    start_load()
+    if($(this).find('.alert-danger').length > 0 )
+      $(this).find('.alert-danger').remove();
+    $.ajax({
+      url:'ajax.php?action=login',
+      method:'POST',
+      data:$(this).serialize(),
+      error:err=>{
+        console.log(err)
+        end_load();
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<!-- Bootstrap -->
+      },
+      success:function(resp){
+        if(resp == 1){
+          location.href ='login.php?page=home';
+        }else{
+          $('#login-form').prepend('<div class="alert alert-danger">Username or password is incorrect.</div>')
+          end_load();
+        }
+      }
+    })
+  })
+  })
+</script>
 <?php include 'footer.php' ?>
+
 </body>
 </html>

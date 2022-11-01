@@ -18,7 +18,7 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="./index.php?page=result" class="nav-link nav-result">
+            <a href="./login.php?page=result" class="nav-link nav-result">
               <i class="nav-icon fas fa-th-list"></i>
               <p>
                 Evaluation Result

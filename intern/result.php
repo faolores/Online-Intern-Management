@@ -243,7 +243,7 @@ function ordinal_suffix($num){
 					hash = _href[i].split('=');
 					vars[hash[0]] = hash[1];
 				}
-			window.history.pushState({}, null, './index.php?page=result&rid='+data.id);
+			window.history.pushState({}, null, './login.php?page=result&rid='+data.id);
 			load_report(<?php echo $faculty_id ?>,data.sid,data.id);
 			$('#subjectField').text(data.subj)
 			$('#classField').text(data.class)
