@@ -48,7 +48,7 @@
 				<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 					<button class="btn btn-primary mr-2">Save</button>
-					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=user_list'">Cancel</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'login.php?page=user_list'">Cancel</button>
 				</div>
 			</form>
 		</div>
@@ -112,7 +112,7 @@
 				if(resp == 1){
 					alert_toast('Data successfully saved.',"success");
 					setTimeout(function(){
-						location.replace('index.php?page=user_list')
+						location.replace('login.php?page=user_list')
 					},750)
 				}else if(resp == 2){
 					$('#msg').html("<div class='alert alert-danger'>Email already exist.</div>");

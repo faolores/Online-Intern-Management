@@ -35,7 +35,7 @@ $restriction = $conn->query("SELECT r.id,s.id as sid,f.id as fid,concat(f.firstn
 							$subject_id = $row['sid'];
 						}
 				?>
-				<a class="list-group-item list-group-item-action <?php echo isset($rid) && $rid == $row['id'] ? 'active' : '' ?>" href="./index.php?page=evaluate&rid=<?php echo $row['id'] ?>&sid=<?php echo $row['sid'] ?>&fid=<?php echo $row['fid'] ?>"><?php echo ucwords($row['faculty']).' - ('.$row["code"].') '.$row['subject'] ?></a>
+				<a class="list-group-item list-group-item-action <?php echo isset($rid) && $rid == $row['id'] ? 'active' : '' ?>" href="./login.php?page=evaluate&rid=<?php echo $row['id'] ?>&sid=<?php echo $row['sid'] ?>&fid=<?php echo $row['fid'] ?>"><?php echo ucwords($row['faculty']).' - ('.$row["code"].') '.$row['subject'] ?></a>
 			<?php endwhile; ?>
 			</div>
 		</div>	

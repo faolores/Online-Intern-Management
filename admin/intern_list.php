@@ -3,7 +3,7 @@
 	<div class="card card-outline card-success">
 		<div class="card-header">
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./index.php?page=new_intern"><i class="fa fa-plus"></i> Add New intern</a>
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./login.php?page=new_intern"><i class="fa fa-plus"></i> Add New intern</a>
 			</div>
 		</div>
 		<div class="card-body">
@@ -35,7 +35,7 @@
 		                    <div class="dropdown-menu" style="">
 		                      <a class="dropdown-item view_faculty" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">View</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item" href="./index.php?page=edit_intern&id=<?php echo $row['id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="./login.php?page=edit_intern&id=<?php echo $row['id'] ?>">Edit</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item delete_faculty" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
 		                    </div>

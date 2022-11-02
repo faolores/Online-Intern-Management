@@ -19,7 +19,7 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="./index.php?page=subject_list" class="nav-link nav-subject_list">
+            <a href="./login.php?page=subject_list" class="nav-link nav-subject_list">
               <i class="nav-icon fas fa-th-list"></i>
               <p>
                 Subjects
@@ -27,7 +27,7 @@
             </a>
           </li> 
           <li class="nav-item dropdown">
-            <a href="./index.php?page=company_list" class="nav-link nav-company_list">
+            <a href="./login.php?page=company_list" class="nav-link nav-company_list">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>
                 Companies
@@ -35,7 +35,7 @@
             </a>
           </li> 
           <li class="nav-item dropdown">
-            <a href="./index.php?page=academic_list" class="nav-link nav-academic_list">
+            <a href="./login.php?page=academic_list" class="nav-link nav-academic_list">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
                 Academic Year
@@ -43,7 +43,7 @@
             </a>
           </li> 
           <li class="nav-item dropdown">
-            <a href="./index.php?page=questionnaire" class="nav-link nav-questionnaire">
+            <a href="./login.php?page=questionnaire" class="nav-link nav-questionnaire">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Questionnaires
@@ -51,7 +51,7 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="./index.php?page=criteria_list" class="nav-link nav-criteria_list">
+            <a href="./login.php?page=criteria_list" class="nav-link nav-criteria_list">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>
                 Evaluation Criteria
@@ -74,7 +74,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.php?page=intern_list" class="nav-link nav-intern_list tree-item">
+                <a href="./login.php?page=intern_list" class="nav-link nav-intern_list tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>List</p>
                 </a>
@@ -91,13 +91,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.php?page=new_industry_professor" class="nav-link nav-new_industry_professor tree-item">
+                <a href="./login.php?page=new_industry_professor" class="nav-link nav-new_industry_professor tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Add New</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.php?page=industry_professor_list" class="nav-link nav-industry_professor_list tree-item">
+                <a href="./login.php?page=industry_professor_list" class="nav-link nav-industry_professor_list tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>List</p>
                 </a>
@@ -105,7 +105,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a href="./index.php?page=report" class="nav-link nav-report">
+            <a href="./login.php?page=report" class="nav-link nav-report">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>
                 Evaluation
@@ -122,13 +122,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.php?page=new_user" class="nav-link nav-new_user tree-item">
+                <a href="./login.php?page=new_user" class="nav-link nav-new_user tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Add New</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.php?page=user_list" class="nav-link nav-user_list tree-item">
+                <a href="./login.php?page=user_list" class="nav-link nav-user_list tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>List</p>
                 </a>

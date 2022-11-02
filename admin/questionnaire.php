@@ -45,7 +45,7 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item manage_questionnaire" href="index.php?page=manage_questionnaire&id=<?php echo $row['id'] ?>">Manage</a>
+		                      <a class="dropdown-item manage_questionnaire" href="login.php?page=manage_questionnaire&id=<?php echo $row['id'] ?>">Manage</a>
 		                    </div>
 						</td>
 					</tr>	

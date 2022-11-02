@@ -253,7 +253,7 @@ function ordinal_suffix($num){
 	$(document).ready(function(){
 		$('#faculty_id').change(function(){
 			if($(this).val() > 0)
-			window.history.pushState({}, null, './index.php?page=report&fid='+$(this).val());
+			window.history.pushState({}, null, './login.php?page=report&fid='+$(this).val());
 			load_class()
 		})
 		if($('#faculty_id').val() > 0)
@@ -308,7 +308,7 @@ function ordinal_suffix($num){
 					hash = _href[i].split('=');
 					vars[hash[0]] = hash[1];
 				}
-			window.history.pushState({}, null, './index.php?page=report&fid='+vars.fid+'&rid='+data.id);
+			window.history.pushState({}, null, './login.php?page=report&fid='+vars.fid+'&rid='+data.id);
 			load_report(vars.fid,data.sid,data.id);
 			$('#subjectField').text(data.subj)
 			$('#classField').text(data.class)

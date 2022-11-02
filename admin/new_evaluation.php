@@ -90,7 +90,7 @@
 				<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 					<button class="btn btn-primary mr-2">Save</button>
-					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=evaluation'">Cancel</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = 'login.php?page=evaluation'">Cancel</button>
 				</div>
 			</form>
 		</div>
@@ -266,7 +266,7 @@
 				if(resp == 1){
 					alert_toast('Data successfully saved.',"success");
 					setTimeout(function(){
-						location.replace('index.php?page=evaluation')
+						location.replace('login.php?page=evaluation')
 					},750)
 				}
 			}
