@@ -1,5 +1,8 @@
 <?php
 include '../db_connect.php';
+$f_arr = [];
+$c_arr = [];
+$s_arr = [];
 ?>
 <div class="container-fluid">
 	<form action="" id="manage-restriction">
@@ -13,7 +16,6 @@ include '../db_connect.php';
 						<option value=""></option>
 						<?php 
 						$intern = $conn->query("SELECT *,concat(firstname,' ',lastname) as name FROM intern_list order by concat(firstname,' ',lastname) asc");
-						$f_arr = array();
 						while($row=$intern->fetch_assoc()):
 							$f_arr[$row['id']]= $row;
 						?>
@@ -27,7 +29,6 @@ include '../db_connect.php';
 						<option value=""></option>
 						<?php 
 						$classes = $conn->query("SELECT id,concat(curriculum,' ',level,' - ',section) as class FROM class_list");
-						$c_arr = array();
 						while($row=$classes->fetch_assoc()):
 							$c_arr[$row['id']]= $row;
 						?>
@@ -41,7 +42,6 @@ include '../db_connect.php';
 						<option value=""></option>
 						<?php 
 						$subject = $conn->query("SELECT id,concat(code,' - ',subject) as subj FROM subject_list");
-						$s_arr = array();
 						while($row=$subject->fetch_assoc()):
 							$s_arr[$row['id']]= $row;
 						?>
