@@ -29,8 +29,12 @@ if(isset($_GET['id'])){
 	$(document).ready(function(){
 		$('#manage-subject').submit(function(e){
 			e.preventDefault();
-			start_load()
 			$('#msg').html('')
+			var code = $('#code').val()
+			var subject = $('#subjcet').val()
+			var description = $('description').val()
+			if (code && subject){
+			start_load()
 			$.ajax({
 				url:'ajax.php?action=save_subject',
 				method:'POST',
@@ -47,6 +51,9 @@ if(isset($_GET['id'])){
 					}
 				}
 			})
+		} else {
+			alert("Please input all fields")
+		}
 		})
 	})
 

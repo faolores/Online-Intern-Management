@@ -22,16 +22,6 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="" class="control-label">Avatar</label>
-							<div class="custom-file">
-		                      <input type="file" class="custom-file-input" id="customFile" name="img" onchange="displayImg(this,$(this))">
-		                      <label class="custom-file-label" for="customFile">Choose file</label>
-		                    </div>
-						</div>
-						<div class="form-group d-flex justify-content-center align-items-center">
-							<img src="<?php echo isset($avatar) ? 'assets/uploads/'.$avatar :'' ?>" alt="Avatar" id="cimg" class="img-fluid img-thumbnail ">
-						</div>
-						<div class="form-group">
 							<label class="control-label">Email</label>
 							<input type="email" pattern = "[a-zA-Z0-9]+@student\.apc\.edu\.ph" class="form-control form-control-sm" placeholder = "@student.apc.edu.ph" name="email" required value="<?php echo isset($email) ? $email : '' ?>">
 							<small id="#msg"></small>

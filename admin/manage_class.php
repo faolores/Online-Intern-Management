@@ -30,24 +30,31 @@ if(isset($_GET['id'])){
 	$(document).ready(function(){
 		$('#manage-class').submit(function(e){
 			e.preventDefault();
-			start_load()
 			$('#msg').html('')
-			$.ajax({
-				url:'ajax.php?action=save_class',
-				method:'POST',
-				data:$(this).serialize(),
-				success:function(resp){
-					if(resp == 1){
-						alert_toast("Data successfully saved.","success");
-						setTimeout(function(){
-							location.reload()	
-						},1750)
-					}else if(resp == 2){
-						$('#msg').html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Company already exist.</div>')
-						end_load()
+			var curriculum = $('#curriculum').val()
+			var level = $('#level').val()
+			var section = $('#section').val()
+			if (curriculum && level && section) {
+				start_load()
+				$.ajax({
+					url:'ajax.php?action=save_class',
+					method:'POST',
+					data:$(this).serialize(),
+					success:function(resp){
+						if(resp == 1){
+							alert_toast("Data successfully saved.","success");
+							setTimeout(function(){
+								location.reload()	
+							},1750)
+						}else if(resp == 2){
+							$('#msg').html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Company already exist.</div>')
+							end_load()
+						}
 					}
-				}
-			})
+				})
+			} else {
+				alert("Please input all fields")
+			}
 		})
 	})
 

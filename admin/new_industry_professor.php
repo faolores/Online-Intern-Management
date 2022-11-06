@@ -31,16 +31,6 @@
 								<?php endwhile; ?>
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="" class="control-label">Avatar</label>
-							<div class="custom-file">
-		                      <input type="file" class="custom-file-input" id="customFile" name="img" onchange="displayImg(this,$(this))">
-		                      <label class="custom-file-label" for="customFile">Choose file</label>
-		                    </div>
-						</div>
-						<div class="form-group d-flex justify-content-center align-items-center">
-							<img src="<?php echo isset($avatar) ? 'assets/uploads/'.$avatar :'' ?>" alt="Avatar" id="cimg" class="img-fluid img-thumbnail ">
-						</div>
 					</div>
 					<div class="col-md-6">
 						

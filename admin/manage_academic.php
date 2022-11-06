@@ -35,24 +35,30 @@ if(isset($_GET['id'])){
 	$(document).ready(function(){
 		$('#manage-academic').submit(function(e){
 			e.preventDefault();
-			start_load()
 			$('#msg').html('')
-			$.ajax({
-				url:'ajax.php?action=save_academic',
-				method:'POST',
-				data:$(this).serialize(),
-				success:function(resp){
-					if(resp == 1){
-						alert_toast("Data successfully saved.","success");
-						setTimeout(function(){
-							location.reload()	
-						},1750)
-					}else if(resp == 2){
-						$('#msg').html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> academic Code already exist.</div>')
-						end_load()
+			var year = $('#year').val()
+			var semester = $('#semester').val()
+			if (year && semester){
+				start_load()
+				$.ajax({
+					url:'ajax.php?action=save_academic',
+					method:'POST',
+					data:$(this).serialize(),
+					success:function(resp){
+						if(resp == 1){
+							alert_toast("Data successfully saved.","success");
+							setTimeout(function(){
+								location.reload()	
+							},1750)
+						}else if(resp == 2){
+							$('#msg').html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> academic Code already exist.</div>')
+							end_load()
+						}
 					}
-				}
-			})
+				})
+			}else{
+				alert("Please input all fields")
+			}
 		})
 	})
 
