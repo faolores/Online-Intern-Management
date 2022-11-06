@@ -1,5 +1,6 @@
 <?php 
 include 'db_connect.php';
+$q_arr = [];
 if(isset($_GET['id'])){
 	$qry = $conn->query("SELECT * FROM academic_list where id = ".$_GET['id'])->fetch_array();
 	foreach($qry as $k => $v){
@@ -76,8 +77,7 @@ function ordinal_suffix($num){
 					</fieldset>
 					<form id="order-question">
 					<div class="clear-fix mt-2"></div>
-					<?php 
-						$q_arr = array();
+					<?php
 						$criteria = $conn->query("SELECT * FROM criteria_list order by abs(order_by) asc ");
 						while($crow = $criteria->fetch_assoc()):
 					?>
@@ -134,8 +134,8 @@ function ordinal_suffix($num){
 					<?php endwhile; ?>
 
 					<?php
-						print_r(json_encode($q_arr));
-						die();
+						// print_r(json_encode($q_arr));
+						// die();
 					?>
 			</div>
 			
@@ -150,89 +150,90 @@ function ordinal_suffix($num){
 
 <script>
 	$(document).ready(function(){
-     $('.select2').select2({
-	    placeholder:"Please select here",
-	    width: "100%"
-	  });
-     })
-	$('.edit_question').click(function(){
-		var id = $(this).attr('data-id')
-		var question = '' + <?php echo json_encode($q_arr) ?> + '';
-		$('#manage-question').find("[name='id']").val(question[id].id)
-		$('#manage-question').find("[name='question']").val(question[id].question)
-		$('#manage-question').find("[name='criteria_id']").val(question[id].criteria_id).trigger('change')
-	})
-	$('.delete_question').click(function(){
-		_conf("Are you sure to delete this question?","delete_question",[$(this).attr('data-id')])
+		alert('<?php echo json_encode($q_arr) ?>');
+		$('.select2').select2({
+			placeholder:"Please select here",
+			width: "100%"
+		});
+		$('.edit_question').click(function(){
+			var id = $(this).attr('data-id')
+			var question = '<?php echo json_encode($q_arr) ?>';
+			$('#manage-question').find("[name='id']").val(question[id].id)
+			$('#manage-question').find("[name='question']").val(question[id].question)
+			$('#manage-question').find("[name='criteria_id']").val(question[id].criteria_id).trigger('change')
 		})
-	$('#eval_restrict').click(function(){
-		uni_modal("Manage Evaluation Restrictions","<?php echo $_SESSION['login_view_folder'] ?>manage_restriction.php?id=<?php echo $id ?>","mid-large")
-	})
-	$('.tr-sortable').sortable()
-	$('#manage-question').on('reset',function(){
-			$(this).find('input[name="id"]').val('')
-			$('#manage-question').find("[name='criteria_id']").val('').trigger('change')
+		$('.delete_question').click(function(){
+			_conf("Are you sure to delete this question?","delete_question",[$(this).attr('data-id')])
+			})
+		$('#eval_restrict').click(function(){
+			uni_modal("Manage Evaluation Restrictions","<?php echo $_SESSION['login_view_folder'] ?>manage_restriction.php?id=<?php echo $id ?>","mid-large")
 		})
-    $('#manage-question').submit(function(e){
-    	e.preventDefault()
-    	start_load()
-    	if($('#question').val() == ''){
-    		alert_toast("Please fill the question description first",'error');
-    		end_load();
-    		return false;
-    	}
-    	$.ajax({
-    		url:'ajax.php?action=save_question',
-			data: new FormData($(this)[0]),
-		    cache: false,
-		    contentType: false,
-		    processData: false,
-		    method: 'POST',
-		    type: 'POST',
-			success:function(resp){
-				if(resp == 1){
-					alert_toast('Data successfully saved',"success");
-					setTimeout(function(){
-						location.reload()
-					},1500)
-				}
+		$('.tr-sortable').sortable()
+		$('#manage-question').on('reset',function(){
+				$(this).find('input[name="id"]').val('')
+				$('#manage-question').find("[name='criteria_id']").val('').trigger('change')
+			})
+		$('#manage-question').submit(function(e){
+			e.preventDefault()
+			start_load()
+			if($('#question').val() == ''){
+				alert_toast("Please fill the question description first",'error');
+				end_load();
+				return false;
 			}
-    	})
-    })
-    $('#order-question').submit(function(e){
-    	e.preventDefault()
-    	start_load()
-    	$.ajax({
-    		url:'ajax.php?action=save_question_order',
-			data: new FormData($(this)[0]),
-		    cache: false,
-		    contentType: false,
-		    processData: false,
-		    method: 'POST',
-		    type: 'POST',
-			success:function(resp){
-				if(resp == 1){
-					alert_toast('Order successfully saved',"success");
-					end_load()
+			$.ajax({
+				url:'ajax.php?action=save_question',
+				data: new FormData($(this)[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				method: 'POST',
+				type: 'POST',
+				success:function(resp){
+					if(resp == 1){
+						alert_toast('Data successfully saved',"success");
+						setTimeout(function(){
+							location.reload()
+						},1500)
+					}
 				}
-			}
-    	})
-    })
-    function delete_question($id){
-		start_load()
-		$.ajax({
-			url:'ajax.php?action=delete_question',
-			method:'POST',
-			data:{id:$id},
-			success:function(resp){
-				if(resp==1){
-					alert_toast("Data successfully deleted",'success')
-					setTimeout(function(){
-						location.reload()
-					},1500)
+			})
+		})
+		$('#order-question').submit(function(e){
+			e.preventDefault()
+			start_load()
+			$.ajax({
+				url:'ajax.php?action=save_question_order',
+				data: new FormData($(this)[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				method: 'POST',
+				type: 'POST',
+				success:function(resp){
+					if(resp == 1){
+						alert_toast('Order successfully saved',"success");
+						end_load()
+					}
+				}
+			})
+		})
+		function delete_question($id){
+			start_load()
+			$.ajax({
+				url:'ajax.php?action=delete_question',
+				method:'POST',
+				data:{id:$id},
+				success:function(resp){
+					if(resp==1){
+						alert_toast("Data successfully deleted",'success')
+						setTimeout(function(){
+							location.reload()
+						},1500)
 
+					}
 				}
-			}
-		})
-	}
+			})
+		}
+	});
 </script>
