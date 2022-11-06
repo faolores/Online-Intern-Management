@@ -150,17 +150,16 @@ function ordinal_suffix($num){
 
 <script>
 	$(document).ready(function(){
-		alert('<?php echo json_encode($q_arr) ?>');
 		$('.select2').select2({
 			placeholder:"Please select here",
 			width: "100%"
 		});
 		$('.edit_question').click(function(){
-			var id = $(this).attr('data-id')
-			var question = '<?php echo json_encode($q_arr) ?>';
-			$('#manage-question').find("[name='id']").val(question[id].id)
-			$('#manage-question').find("[name='question']").val(question[id].question)
-			$('#manage-question').find("[name='criteria_id']").val(question[id].criteria_id).trigger('change')
+			var id = $(this).attr('data-id');
+			var question = JSON.parse(JSON.stringify(<?php echo json_encode($q_arr) ?>));
+			$('#manage-question').find("[name='id']").val(question[id].id);
+			$('#manage-question').find("[name='question']").val(question[id].question);
+			$('#manage-question').find("[name='criteria_id']").val(question[id].criteria_id).trigger('change');
 		})
 		$('.delete_question').click(function(){
 			_conf("Are you sure to delete this question?","delete_question",[$(this).attr('data-id')])
