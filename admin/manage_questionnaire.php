@@ -116,7 +116,7 @@ function ordinal_suffix($num){
 									<?php echo $row['question'] ?>
 									<input type="hidden" name="qid[]" value="<?php echo $row['id'] ?>">
 								</td>
-								<?php for($c=1;$c<6;$c++): ?>
+								<?php for($c=1;$c<7;$c++): ?>
 								<td class="text-center">
 									<div class="icheck-success d-inline">
 				                        <input type="radio" name="qid[<?php echo $row['id'] ?>][]" id="qradio<?php echo $row['id'].'_'.$c ?>">
