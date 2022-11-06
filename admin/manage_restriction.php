@@ -1,5 +1,8 @@
 <?php
 include '../db_connect.php';
+$f_arr = [];
+$c_arr = [];
+$s_arr = [];
 ?>
 <div class="container-fluid">
 	<form action="" id="manage-restriction">
@@ -13,9 +16,8 @@ include '../db_connect.php';
 						<option value=""></option>
 						<?php 
 						$intern = $conn->query("SELECT *,concat(firstname,' ',lastname) as name FROM intern_list order by concat(firstname,' ',lastname) asc");
-						$f_arr = array();
 						while($row=$intern->fetch_assoc()):
-							$f_arr[$row['id']]= $row;
+							$f_arr[$row['id']] = $row;
 						?>
 						<option value="<?php echo $row['id'] ?>" <?php echo isset($intern_id) && $intern_id == $row['id'] ? "selected" : "" ?>><?php echo ucwords($row['name']) ?></option>
 						<?php endwhile; ?>
@@ -27,7 +29,6 @@ include '../db_connect.php';
 						<option value=""></option>
 						<?php 
 						$classes = $conn->query("SELECT id,concat(curriculum,' ',level,' - ',section) as class FROM class_list");
-						$c_arr = array();
 						while($row=$classes->fetch_assoc()):
 							$c_arr[$row['id']]= $row;
 						?>
@@ -41,7 +42,6 @@ include '../db_connect.php';
 						<option value=""></option>
 						<?php 
 						$subject = $conn->query("SELECT id,concat(code,' - ',subject) as subj FROM subject_list");
-						$s_arr = array();
 						while($row=$subject->fetch_assoc()):
 							$s_arr[$row['id']]= $row;
 						?>
@@ -128,9 +128,12 @@ include '../db_connect.php';
 			var cid = frm.find('#class_id').val()
 			var fid = frm.find('#intern_id').val()
 			var sid = frm.find('#subject_id').val()
-			var f_arr = <?php echo json_encode($f_arr) ?>;
-			var c_arr = <?php echo json_encode($c_arr) ?>;
-			var s_arr = <?php echo json_encode($s_arr) ?>;
+			var f_arr = JSON.parse(JSON.stringify(<?php echo json_encode($f_arr) ?>));
+			var c_arr = JSON.parse(JSON.stringify(<?php echo json_encode($c_arr) ?>));
+			var s_arr = JSON.parse(JSON.stringify(<?php echo json_encode($s_arr) ?>));
+			console.log(f_arr);
+			console.log(c_arr);
+			console.log(s_arr);
 			var tr = $("<tr></tr>")
 			tr.append('<td><b>'+f_arr[fid].name+'</b><input type="hidden" name="rid[]" value=""><input type="hidden" name="intern_id[]" value="'+fid+'"></td>')
 			tr.append('<td><b>'+c_arr[cid].class+'</b><input type="hidden" name="class_id[]" value="'+cid+'"></td>')
@@ -142,6 +145,5 @@ include '../db_connect.php';
 			frm.find('#subject_id').val('').trigger('change')
 			end_load()
 		})
-	})
-
+	});
 </script>

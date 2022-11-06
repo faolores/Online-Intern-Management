@@ -171,41 +171,7 @@ function ordinal_suffix($num){
 				<b>APC Grade Equivalent = <td><span id="apc_grade"></b>
 
 								</div>
-			<div class="card-body">
-			<fieldset class="border border-info p-2 w-50">
 
-				<form action="#" method="post">
-					<legend  class="w-auto">Total Intern Grade :</legend>
-
-					<br>
-
-					<input type="number" id="head_grade_input" min="0" max="100" onkeyup="getHeadGrade()" onchange="getHeadGrade()" name="head_grade_input" required/>
-
-					<br>
-
-					<b> Industry Professor Grade (70%) =  <input type="text" id="comp_per_grade" style="border: 0; width: 50px;" name="comp_per_grade" readonly required/></b>
-
-					<br>
-
-					<b> Internship Head Grade (30%) = <input type="text" id="head_grade" style="border: 0; width: 50px;" name="head_grade" readonly required/></b>
-
-					<br>
-
-					---------------------------------------------------------------
-
-					<br>
-
-					<b> Final Score = <input type="text" id="final_grade" style="border: 0; width: 50px;" name="final_grade" readonly required/></b>
-
-					<br>
-
-					<b> APC Final Grade Equivalent = <input type="text" id="final_rating" style="border: 0; width: 50px;" name="final_rating" readonly required/></b>
-					
-					<br><br>
-					<input type="submit" name="submit" value="Submit" />
-				</form>
-				<br>
-			</div>
 			<div>
 		</div>
 	</div>
