@@ -77,7 +77,7 @@ function ordinal_suffix($num){
 					<form id="order-question">
 					<div class="clear-fix mt-2"></div>
 					<?php 
-							$q_arr = array();
+						$q_arr = array();
 						$criteria = $conn->query("SELECT * FROM criteria_list order by abs(order_by) asc ");
 						while($crow = $criteria->fetch_assoc()):
 					?>
@@ -98,6 +98,8 @@ function ordinal_suffix($num){
 							$questions = $conn->query("SELECT * FROM question_list where criteria_id = {$crow['id']} and academic_id = $id order by abs(order_by) asc ");
 							while($row=$questions->fetch_assoc()):
 							$q_arr[$row['id']] = $row;
+							print_r($q_arr);
+							die();
 							?>
 							<tr class="bg-white">
 								<td class="p-1 text-center" width="5px">
@@ -153,7 +155,7 @@ function ordinal_suffix($num){
      })
 	$('.edit_question').click(function(){
 		var id = $(this).attr('data-id')
-		var question = <?php echo json_encode($q_arr) ?>;
+		var question = '' + <?php echo json_encode($q_arr) ?> + '';
 		$('#manage-question').find("[name='id']").val(question[id].id)
 		$('#manage-question').find("[name='question']").val(question[id].question)
 		$('#manage-question').find("[name='criteria_id']").val(question[id].criteria_id).trigger('change')
