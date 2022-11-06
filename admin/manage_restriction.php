@@ -128,9 +128,12 @@ include '../db_connect.php';
 			var cid = frm.find('#class_id').val()
 			var fid = frm.find('#intern_id').val()
 			var sid = frm.find('#subject_id').val()
-			var f_arr = <?php echo json_encode($f_arr) ?>;
-			var c_arr = <?php echo json_encode($c_arr) ?>;
-			var s_arr = <?php echo json_encode($s_arr) ?>;
+			var f_arr = JSON.parse(JSON.stringify(<?php echo json_encode($f_arr) ?>));
+			var c_arr = JSON.parse(JSON.stringify(<?php echo json_encode($c_arr) ?>));
+			var s_arr = JSON.parse(JSON.stringify(<?php echo json_encode($s_arr) ?>));
+			console.log(f_arr);
+			console.log(c_arr);
+			console.log(s_arr);
 			var tr = $("<tr></tr>")
 			tr.append('<td><b>'+f_arr[fid].name+'</b><input type="hidden" name="rid[]" value=""><input type="hidden" name="intern_id[]" value="'+fid+'"></td>')
 			tr.append('<td><b>'+c_arr[cid].class+'</b><input type="hidden" name="class_id[]" value="'+cid+'"></td>')
@@ -142,6 +145,5 @@ include '../db_connect.php';
 			frm.find('#subject_id').val('').trigger('change')
 			end_load()
 		})
-	})
-
+	});
 </script>
