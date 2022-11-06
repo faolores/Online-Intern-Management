@@ -17,7 +17,7 @@ $s_arr = [];
 						<?php 
 						$intern = $conn->query("SELECT *,concat(firstname,' ',lastname) as name FROM intern_list order by concat(firstname,' ',lastname) asc");
 						while($row=$intern->fetch_assoc()):
-							$f_arr[$row['id']]= $row;
+							$f_arr[$row['id']] = $row;
 						?>
 						<option value="<?php echo $row['id'] ?>" <?php echo isset($intern_id) && $intern_id == $row['id'] ? "selected" : "" ?>><?php echo ucwords($row['name']) ?></option>
 						<?php endwhile; ?>
