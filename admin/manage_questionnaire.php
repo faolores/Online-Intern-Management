@@ -98,8 +98,6 @@ function ordinal_suffix($num){
 							$questions = $conn->query("SELECT * FROM question_list where criteria_id = {$crow['id']} and academic_id = $id order by abs(order_by) asc ");
 							while($row=$questions->fetch_assoc()):
 							$q_arr[$row['id']] = $row;
-							print_r($q_arr);
-							die();
 							?>
 							<tr class="bg-white">
 								<td class="p-1 text-center" width="5px">
@@ -134,7 +132,11 @@ function ordinal_suffix($num){
 						
 					</table>
 					<?php endwhile; ?>
-				
+
+					<?php
+						print_r(json_encode($q_arr));
+						die();
+					?>
 			</div>
 			
 			
