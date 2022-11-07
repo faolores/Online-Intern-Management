@@ -137,7 +137,7 @@ function ordinal_suffix($num){
 				<tr>
 					
 					<th>Rating</th>
-					<th>Subtotal Points (No. of Ratings × Rating)</th>
+					<th>Subtotal Points (No. of Ratings Ã— Rating)</th>
 				</tr>
 				<tr	>
 				<td class = "text-center"> 5  <td class = "text-center"><span id="total_5">=</td></td>
@@ -168,8 +168,10 @@ function ordinal_suffix($num){
 				<b> Percentage = <span id="grand_per"></b>
 				</span>
 				<br>
-				<b>APC Grade Equivalent = <td><span id="apc_grade"></b>
-				</div>
+				<h5 style ="font-weight: bold">APC Grade Equivalent = <td><span id="apc_grade"></h5>
+
+								</div>
+			
 			<div>
 		</div>
 	</div>
@@ -217,7 +219,7 @@ function ordinal_suffix($num){
 	$(document).ready(function(){
 		$('#faculty_id').change(function(){
 			if($(this).val() > 0)
-			window.history.pushState({}, null, './login.php?page=report&fid='+$(this).val());
+			window.history.pushState({}, null, './index.php?page=report&fid='+$(this).val());
 			load_class()
 		})
 		if($('#faculty_id').val() > 0)
@@ -272,7 +274,7 @@ function ordinal_suffix($num){
 					hash = _href[i].split('=');
 					vars[hash[0]] = hash[1];
 				}
-			window.history.pushState({}, null, './login.php?page=report&fid='+vars.fid+'&rid='+data.id);
+			window.history.pushState({}, null, './index.php?page=report&fid='+vars.fid+'&rid='+data.id);
 			load_report(vars.fid,data.sid,data.id);
 			$('#subjectField').text(data.subj)
 			$('#classField').text(data.class)
@@ -306,33 +308,34 @@ function ordinal_suffix($num){
 						var data = resp.data
 						Object.keys(data).map(q=>{
 							Object.keys(data[q]).map(r=>{
-								// console.log('R - ' + r)
-								// console.log('Q - ' + q)
-								// console.log($('.rate_'+r+'_'+q),data[q][r])
-								$('.rate_'+r+'_'+q).html('&#10003;')
+								 //console.log('R - ' + r)
+								 //console.log('Q - ' + q)
+								 //console.log($('.rate_'+r+'_'+q),data[q][r])
+								$('.rate_'+(r-1)+'_'+q).html('&#10003;')
 								switch (r) {
 									case '1':
-										$('.rate_'+r+'_'+q).attr('score', 5);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 5);
 										total_5++;
 										break;
 									case '2':
-										$('.rate_'+r+'_'+q).attr('score', 4);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 4);
 										total_4++;
 										break;
 									case '3':
-										$('.rate_'+r+'_'+q).attr('score', 3);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 3);
 										total_3++;
 										break;
 									case '4':
-										$('.rate_'+r+'_'+q).attr('score', 2);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 2);
 										total_2++;
 										break;
 									case '5':
-										$('.rate_'+r+'_'+q).attr('score', 1);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 1);
 										total_1++;
 										break;
-									default:
-										$('.rate_'+r+'_'+q).attr('score', 'NA');
+									default: 
+										$('.rate_5_'+q).html('&#10003;')
+										$('.rate_'+(r-1)+'_'+q).attr('score', 'NA');
 										total_na++;
 										break;
 								}
