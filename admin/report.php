@@ -334,7 +334,6 @@ function ordinal_suffix($num){
 										total_1++;
 										break;
 									default: 
-										$('.rate_5_'+q).html('&#10003;')
 										$('.rate_'+(r-1)+'_'+q).attr('score', 'NA');
 										total_na++;
 										break;
