@@ -168,10 +168,10 @@ function ordinal_suffix($num){
 				<b> Percentage = <span id="grand_per"></b>
 				</span>
 				<br>
-				<b>APC Grade Equivalent = <td><span id="apc_grade"></b>
+				<h5 style ="font-weight: bold">APC Grade Equivalent = <td><span id="apc_grade"></h5>
 
 								</div>
-
+			
 			<div>
 		</div>
 	</div>
@@ -308,33 +308,34 @@ function ordinal_suffix($num){
 						var data = resp.data
 						Object.keys(data).map(q=>{
 							Object.keys(data[q]).map(r=>{
-								// console.log('R - ' + r)
-								// console.log('Q - ' + q)
-								// console.log($('.rate_'+r+'_'+q),data[q][r])
-								$('.rate_'+r+'_'+q).html('&#10003;')
+								 //console.log('R - ' + r)
+								 //console.log('Q - ' + q)
+								 //console.log($('.rate_'+r+'_'+q),data[q][r])
+								$('.rate_'+(r-1)+'_'+q).html('&#10003;')
 								switch (r) {
 									case '1':
-										$('.rate_'+r+'_'+q).attr('score', 5);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 5);
 										total_5++;
 										break;
 									case '2':
-										$('.rate_'+r+'_'+q).attr('score', 4);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 4);
 										total_4++;
 										break;
 									case '3':
-										$('.rate_'+r+'_'+q).attr('score', 3);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 3);
 										total_3++;
 										break;
 									case '4':
-										$('.rate_'+r+'_'+q).attr('score', 2);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 2);
 										total_2++;
 										break;
 									case '5':
-										$('.rate_'+r+'_'+q).attr('score', 1);
+										$('.rate_'+(r-1)+'_'+q).attr('score', 1);
 										total_1++;
 										break;
-									default:
-										$('.rate_'+r+'_'+q).attr('score', 'NA');
+									default: 
+										$('.rate_5_'+q).html('&#10003;')
+										$('.rate_'+(r-1)+'_'+q).attr('score', 'NA');
 										total_na++;
 										break;
 								}
