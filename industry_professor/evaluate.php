@@ -92,7 +92,7 @@ $restriction = $conn->query("SELECT r.id,s.id as sid,f.id as fid,concat(f.firstn
 									<?php echo $row['question'] ?>
 									<input type="hidden" name="qid[]" value="<?php echo $row['id'] ?>">
 								</td>
-								<?php for($c=0;$c<=6;$c++): ?>
+								<?php for($c=0;$c<=5;$c++): ?>
 								<td class="text-center">
 									<div class="icheck-success d-inline">
 				                        <input type="radio" name="rate[<?php echo $row['id'] ?>]" <?php echo $c == 5 ? "" : '' ?> id="qradio<?php echo $row['id'].'_'.$c ?>" value="<?php echo $c ?>" required>
