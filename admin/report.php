@@ -137,7 +137,7 @@ function ordinal_suffix($num){
 				<tr>
 					
 					<th>Rating</th>
-					<th>Subtotal Points (No. of Ratings Ã— Rating)</th>
+					<th>Subtotal Points (No. of Ratings × Rating)</th>
 				</tr>
 				<tr	>
 				<td class = "text-center"> 5  <td class = "text-center"><span id="total_5">=</td></td>
