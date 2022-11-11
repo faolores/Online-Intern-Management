@@ -308,34 +308,33 @@ function ordinal_suffix($num){
 						var data = resp.data
 						Object.keys(data).map(q=>{
 							Object.keys(data[q]).map(r=>{
-								 //console.log('R - ' + r)
-								 //console.log('Q - ' + q)
-								 //console.log($('.rate_'+r+'_'+q),data[q][r])
-								$('.rate_'+(r-1)+'_'+q).html('&#10003;')
+								console.log('R - ' + r)
+								console.log('Q - ' + q)
+								console.log($('.rate_'+r+'_'+q),data[q][r])
+								$('.rate_'+r+'_'+q).html('&#10003;')
 								switch (r) {
-									case '1':
-										$('.rate_'+(r-1)+'_'+q).attr('score', 5);
+									case '0':
+										$('.rate_'+r+'_'+q).attr('score', 5);
 										total_5++;
 										break;
-									case '2':
-										$('.rate_'+(r-1)+'_'+q).attr('score', 4);
+									case '1':
+										$('.rate_'+r+'_'+q).attr('score', 4);
 										total_4++;
 										break;
-									case '3':
-										$('.rate_'+(r-1)+'_'+q).attr('score', 3);
+									case '2':
+										$('.rate_'+r+'_'+q).attr('score', 3);
 										total_3++;
 										break;
-									case '4':
-										$('.rate_'+(r-1)+'_'+q).attr('score', 2);
+									case '3':
+										$('.rate_'+r+'_'+q).attr('score', 2);
 										total_2++;
 										break;
-									case '5':
-										$('.rate_'+(r-1)+'_'+q).attr('score', 1);
+									case '4':
+										$('.rate_'+r+'_'+q).attr('score', 1);
 										total_1++;
 										break;
 									default: 
-										$('.rate_5_'+q).html('&#10003;')
-										$('.rate_'+(r-1)+'_'+q).attr('score', 'NA');
+										$('.rate_'+r+'_'+q).attr('score', 'NA');
 										total_na++;
 										break;
 								}
@@ -343,6 +342,13 @@ function ordinal_suffix($num){
 						})
 
 						//put value in span
+						console.log(total_5)
+						console.log(total_4)
+						console.log(total_3)
+						console.log(total_2)
+						console.log(total_1)
+						console.log(total_na)
+
 						prod_5 = total_5 * 5
 						prod_4 = total_4 * 4
 						prod_3 = total_3 * 3

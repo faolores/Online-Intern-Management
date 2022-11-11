@@ -663,26 +663,26 @@ Class Action {
 	}
 	function get_report(){
 		extract($_POST);
-		$data = array();
+		$data = [];
 		$get = $this->db->query("SELECT * FROM evaluation_answers where evaluation_id in (SELECT evaluation_id FROM evaluation_list where academic_id = {$_SESSION['academic']['id']} and intern_id = {$_POST['faculty_id']} and subject_id = $subject_id and class_id = $class_id ) ");
 		$answered = $this->db->query("SELECT * FROM evaluation_list where academic_id = {$_SESSION['academic']['id']} and intern_id = {$_POST['faculty_id']} and subject_id = $subject_id and class_id = $class_id");
-			$rate = array();
+		$rate = [];
 		while($row = $get->fetch_assoc()){
-			if(!isset($rate[$row['question_id']][$row['rate']]))
-			$rate[$row['question_id']][$row['rate']] = 0;
-			$rate[$row['question_id']][$row['rate']] += 1;
-
+			if(!isset($rate[$row['question_id']][$row['rate']])) {
+				$rate[$row['question_id']][$row['rate']] = 0;
+				$rate[$row['question_id']][$row['rate']] += 1;
+			}
 		}
-		// $data[]= $row;
+
 		$ta = $answered->num_rows;
-		$r = array();
+		$r = [];
 		foreach($rate as $qk => $qv){
 			foreach($qv as $rk => $rv){
-			$r[$qk][$rk] =($rate[$qk][$rk] / $ta) *100;
+				$r[$qk][$rk] = ($rate[$qk][$rk] / $ta) *100;
+			}
 		}
-	}
-	$data['tse'] = $ta;
-	$data['data'] = $r;
+		$data['tse'] = $ta;
+		$data['data'] = $r;
 		
 		return json_encode($data);
 
