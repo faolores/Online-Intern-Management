@@ -613,11 +613,15 @@ Class Action {
 	function save_restriction(){
 		extract($_POST);
 		$filtered = implode(",",array_filter($rid));
+		$industry_profs = [];
 		if(!empty($filtered))
 			$this->db->query("DELETE FROM restriction_list where id not in ($filtered) and academic_id = $academic_id");
 		else
 			$this->db->query("DELETE FROM restriction_list where  academic_id = $academic_id");
 		foreach($rid as $k => $v){
+			if (!in_array($class_id[$k], $industry_profs)) {
+				$industry_profs[] = $class_id[$k];
+			}
 			$data = " academic_id = $academic_id ";
 			$data .= ", intern_id = {$intern_id[$k]} ";
 			$data .= ", class_id = {$class_id[$k]} ";
@@ -628,7 +632,22 @@ Class Action {
 				$save[] = $this->db->query("UPDATE restriction_list set $data where id = $v ");
 			}
 		}
-			return 1;
+
+		foreach ($industry_profs as $industry_prof) {
+			$system_settings = $this->db->query("SELECT * FROM system_settings WHERE id = 1");
+			$system_settings_row= $system_settings->fetch_array();
+
+			$notif_user_id = $_SESSION['login_id'];
+			$notif_target_user_id = $industry_prof;
+			$message = "New restriction list added into your account. You may now evaluate.";
+			$url = $system_settings_row["url"] . "https://staging-online-internship-mngt.herokuapp.com/login.php?page=evaluate";
+			$this->db->query("
+				INSERT INTO `notification`(`user_id`, `target_user_id`, `message`, `url`) 
+				VALUES ('".$notif_user_id."','".$notif_target_user_id."','".$message."','".$url."')
+			");
+		}
+
+		return 1;
 	}
 	function save_evaluation(){
 		extract($_POST);
@@ -647,8 +666,23 @@ Class Action {
 				$data .= ", rate = {$rate[$v]} ";
 				$ins[] = $this->db->query("INSERT INTO evaluation_answers set $data ");
 			}
-			if(isset($ins))
+			if(isset($ins)){
+				$system_settings = $this->db->query("SELECT * FROM system_settings WHERE id = 1");
+				$system_settings_row= $system_settings->fetch_array();
+
+				$industry_professor_list = $this->db->query("SELECT * FROM industry_professor_list WHERE class_id = ".$class_id." LIMIT 1");
+				$industry_professor_list_row= $industry_professor_list->fetch_array();
+
+				$notif_user_id = $_SESSION['login_id'];
+				$notif_target_user_id = 1;
+				$message = $industry_professor_list_row['firstname'] . " " . $industry_professor_list_row['lastname'] . " has evaluated their intern. Please check evaluation report.";
+				$url = $system_settings_row["url"] . "https://staging-online-internship-mngt.herokuapp.com/login.php?page=report";
+				$this->db->query("
+					INSERT INTO `notification`(`user_id`, `target_user_id`, `message`, `url`) 
+					VALUES ('".$notif_user_id."','".$notif_target_user_id."','".$message."','".$url."')
+				");
 				return 1;
+			}
 		}
 	}
 	function get_class(){
@@ -686,5 +720,12 @@ Class Action {
 		
 		return json_encode($data);
 
+	}
+
+	function notif_read() {
+		extract($_POST);
+		$this->db->query("UPDATE notification SET is_read=1 WHERE id={$_POST['notif_id']}");
+
+		return 1;
 	}
 }

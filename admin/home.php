@@ -11,6 +11,7 @@ function ordinal_suffix1($num){
     }
     return $num.'th';
 }
+$notifications = $conn->query("SELECT * FROM notification WHERE target_user_id=".$_SESSION['login_id']." AND user_id <> 1 order by id desc limit 10");
 $astat = array("Not Yet Started","On-going","Closed");
  ?>
  <div class="col-12">
@@ -26,7 +27,40 @@ $astat = array("Not Yet Started","On-going","Closed");
         </div>
       </div>
     </div>
-</div>
+  </div>
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        Notifications
+        <br>
+        <div class="col-md-12">
+          <?php
+            while($row = $notifications->fetch_assoc()){
+              $is_new = "";
+
+              if (!$row['is_read']) {
+                $is_new = "<span style='color:red;'>*new</span>";
+                echo '
+                  <a onclick="notif_click('.$row['id'].', \''.$row['url'].'\')" href="#">
+                    <div class="callout callout-info">
+                      <h6><b>'.$row['created_at'].'</b>: '.$row['message'].' '.$is_new.'</h6>
+                    </div>
+                  </a>
+                ';
+              } else {
+                echo '
+                  <div class="callout callout-info">
+                    <h6><b>'.$row['created_at'].'</b>: '.$row['message'].' '.$is_new.'</h6>
+                  </div>
+                ';
+              }
+            }
+          ?>
+        </div>
+      </div>
+    </div>
+  </div>
         <div class="row">
           <div class="col-12 col-sm-6 col-md-4">
             <div class="small-box bg-light shadow-sm border">
@@ -77,3 +111,22 @@ $astat = array("Not Yet Started","On-going","Closed");
             </div>
           </div>
       </div>
+
+      <script>
+        function notif_click(id, url) {
+          $.ajax({
+            url:'ajax.php?action=notif_read',
+            method:'POST',
+            data: {
+              'notif_id': id
+            },
+            error:err=>{
+              //
+            },
+            success:function(resp){
+              location.href = url;
+            }
+          })
+        }
+      </script>
+      
