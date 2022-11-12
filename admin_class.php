@@ -640,7 +640,7 @@ Class Action {
 			$notif_user_id = $_SESSION['login_id'];
 			$notif_target_user_id = $industry_prof;
 			$message = "New restriction list added into your account. You may now evaluate.";
-			$url = $system_settings_row["url"] . "https://staging-online-internship-mngt.herokuapp.com/login.php?page=evaluate";
+			$url = $system_settings_row["url"] . "online-internship-mngt.herokuapp.com/login.php?page=evaluate";
 			$this->db->query("
 				INSERT INTO `notification`(`user_id`, `target_user_id`, `message`, `url`) 
 				VALUES ('".$notif_user_id."','".$notif_target_user_id."','".$message."','".$url."')
@@ -676,7 +676,7 @@ Class Action {
 				$notif_user_id = $_SESSION['login_id'];
 				$notif_target_user_id = 1;
 				$message = $industry_professor_list_row['firstname'] . " " . $industry_professor_list_row['lastname'] . " has evaluated their intern. Please check evaluation report.";
-				$url = $system_settings_row["url"] . "https://staging-online-internship-mngt.herokuapp.com/login.php?page=report";
+				$url = $system_settings_row["url"] . "online-internship-mngt.herokuapp.com/login.php?page=report";
 				$this->db->query("
 					INSERT INTO `notification`(`user_id`, `target_user_id`, `message`, `url`) 
 					VALUES ('".$notif_user_id."','".$notif_target_user_id."','".$message."','".$url."')
