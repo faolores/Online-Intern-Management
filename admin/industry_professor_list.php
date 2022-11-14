@@ -14,7 +14,7 @@
 						<th>School ID</th>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Current Class</th>
+						<th>Company</th>
 						<th>Action</th>
 					</tr>
 				</thead>
